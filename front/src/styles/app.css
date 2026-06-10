@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #171310;
+  color: #201b16;
+  font-family: Arial, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
