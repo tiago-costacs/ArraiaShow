@@ -3,6 +3,9 @@ import { db } from '../config/db.js';
 // Criar uma nova barraca
 export const criarBarraca = (req, res) => {
     const { evento_id, nome, responsavel_id } = req.body;
+    if (!evento_id || !nome || !responsavel_id) {
+        return res.status(400).json({ error: "Evento, nome e responsavel sao obrigatorios para cadastrar barraca." });
+    }
 
     const query = 'INSERT INTO barracas (evento_id, nome, responsavel_id) VALUES (?, ?, ?)';
 

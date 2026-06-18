@@ -3,9 +3,24 @@ import { db } from "../config/db.js";
 // Criar um novo produto
 export const criarProduto = (req, res) => {
     const { barraca_id, nome, preco, estoque } = req.body;
+    if (!barraca_id || !nome || preco === undefined || estoque === undefined) {
+        return res.status(400).json({ error: "Barraca, nome, preco e estoque sao obrigatorios." });
+    }
+
+    const precoNumero = Number(preco);
+    const estoqueNumero = Number(estoque);
+
+    if (Number.isNaN(precoNumero) || precoNumero < 0) {
+        return res.status(400).json({ error: "Preco invalido. Deve ser maior ou igual a zero." });
+    }
+
+    if (Number.isNaN(estoqueNumero) || estoqueNumero < 0) {
+        return res.status(400).json({ error: "Estoque invalido. Deve ser maior ou igual a zero." });
+    }
+
     const query = 'INSERT INTO produtos (barraca_id, nome, preco, estoque) VALUES (?, ?, ?, ?)';
 
-    db.query(query, [barraca_id, nome, preco, estoque], (err, result) => {
+    db.query(query, [barraca_id, nome, precoNumero, estoqueNumero], (err, result) => {
         if (err) return res.status(500).json(err);
         res.status(201).json({ message: "Produto criado com sucesso!", id: result.insertId });
     }

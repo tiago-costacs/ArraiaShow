@@ -18,6 +18,14 @@
     "start": "node backend/server.js",
     "dev": "node --watch backend/server.js",
     "rodar": "node --watch backend/server.js",
+    "test": "npm run test:backend",
+    "test:backend": "npm run test:auth && npm run test:eventos && npm run test:barracas && npm run test:produtos && npm run test:pedidos",
+    "test:auth": "node --test backend/tests/functional/01-auth-permissions.test.js",
+    "test:eventos": "node --test backend/tests/functional/02-eventos.test.js",
+    "test:barracas": "node --test backend/tests/functional/03-barracas.test.js",
+    "test:produtos": "node --test backend/tests/functional/04-produtos.test.js",
+    "test:pedidos": "node --test backend/tests/functional/05-pedidos.test.js",
+    "test:frontend": "echo \"Front-end tests not configured.\" && exit 0",
     "commit": "git add . && git commit -m 'Update' && git push"
   },
   "dependencies": {
